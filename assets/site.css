@@ -1,0 +1,110 @@
+/* Golden Calf Artisan Butcher demo. Built from pipeline/3-design.md Revision 2, 2026-11-18.
+   Two places: his wall and his case. Every pixel is one of their photographs; no fills anywhere. */
+:root{--cream:#F3E7D4;--ink:#0A0606;
+ --fm:Mohave,"Arial Narrow","Roboto Condensed",sans-serif;
+ --ff:Figtree,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+ --fx:"Share Tech Mono",ui-monospace,Consolas,"Cascadia Mono",monospace}
+*{box-sizing:border-box}
+html,body{margin:0;background:#000}
+p,h1,h2,ul,figure{margin:0;padding:0}
+ul{list-style:none}
+img{display:block;max-width:none}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;display:block}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+@media (max-width:1023.98px){.dk{display:none!important}}
+@media (min-width:1024px){.ph{display:none!important}}
+#page{color:var(--cream);font-family:var(--ff)}
+.w{position:absolute;margin:0}
+.hide .w,.hide .w *{visibility:hidden!important}
+.nw{white-space:nowrap}
+
+/* type (2b-type.md and its amendment) */
+.nm{font-family:var(--fm);font-weight:500;text-transform:uppercase;letter-spacing:.06em;line-height:1;white-space:nowrap}
+.hl{font-family:var(--fm);font-weight:600;text-transform:uppercase;letter-spacing:.03em;line-height:1;white-space:nowrap}
+.ct{-webkit-text-stroke:var(--sw,3px) var(--ink);paint-order:stroke fill}
+@supports not (paint-order:stroke fill){.ct{-webkit-text-stroke:0;text-shadow:1.5px 0 #0A0606,-1.5px 0 #0A0606,0 1.5px #0A0606,0 -1.5px #0A0606,1px 1px #0A0606,-1px 1px #0A0606,1px -1px #0A0606,-1px -1px #0A0606}}
+.lab{font-family:var(--ff);font-weight:800;text-transform:uppercase;letter-spacing:.25em;font-size:12px;line-height:1.35}
+.sm{font-weight:600}
+.q{font-weight:400}
+.mono{font-family:var(--fx);font-weight:400}
+.demo{font-weight:600;font-size:13px;line-height:17px}
+
+/* the wall: one photograph in native px, framed by a transform */
+#hold{position:relative}
+#stage{position:relative;overflow:hidden}
+#wallbox{position:absolute;left:0;top:0;width:2040px;height:1536px;transform-origin:0 0}
+#wallbox>img,#wallbox>svg{position:absolute}
+#wallimg{left:0;top:0;width:2040px;height:1536px}
+.pc,.shd{height:auto;opacity:0;transform-origin:50% 50%;pointer-events:none}
+.pc.up{opacity:1;transform:translateY(8px) scale(1.03)}
+.shd.up{opacity:1;transform:translate(4px,16px)}
+.hit{left:0;top:0;width:2040px;height:1536px;overflow:visible}
+.hit path,.hit rect{fill:transparent;stroke:none;cursor:pointer;outline:none}
+.hit [tabindex="0"]:focus-visible,.hit a:focus-visible path,.hit a:focus-visible rect{stroke:var(--cream);stroke-width:3px;vector-effect:non-scaling-stroke}
+.hit a{outline:none}
+.hit.off{visibility:hidden}
+.hit.still{pointer-events:none}
+#caselayer{position:absolute;left:0;top:0;height:auto}
+
+/* standing tags and their wire */
+.ts{position:absolute;display:block;visibility:hidden;pointer-events:none}
+.ts.on{visibility:visible}
+#ptag.on{pointer-events:auto}
+#travel{position:fixed;left:0;top:0;z-index:20}
+.ts img,.hd img{width:100%;height:auto;transform-origin:50% 100%;filter:drop-shadow(0 6px 8px rgba(0,0,0,.45))}
+.wire{position:absolute;left:50%;top:100%;width:1.5px;margin-left:-.75px;height:18px;background:#B9B9B9;transform-origin:50% 0}
+@media (min-width:1024px){.ts img,.hd img{filter:drop-shadow(0 8px 12px rgba(0,0,0,.45))}}
+
+#name{color:var(--cream)}
+#patch p{white-space:nowrap;overflow:hidden}
+#patch,#col{font-weight:600}
+#col p{white-space:nowrap}
+#mark{position:absolute;height:auto}
+#mapline{color:var(--ink);font-weight:600;font-size:14px;line-height:19px;white-space:nowrap}
+#credit{color:var(--ink);white-space:nowrap}
+@media (max-width:1023.98px){#credit{font-weight:600;font-size:12px;line-height:13px}}
+@media (min-width:1024px){#credit{font-weight:800;text-transform:uppercase;letter-spacing:.25em}}
+
+/* words that belong to one framing of the phone wall */
+.fade{transition:opacity .2s linear}
+.gone{opacity:0!important;transition:opacity .15s linear;pointer-events:none!important}
+.gone *{pointer-events:none!important}
+.rm .fade,.rm .gone{transition:none}
+
+/* arrival: hidden until site.js starts it */
+.arr #hl,.arr #patch,.arr #mark,.arr #name.dkn,.arr #col{opacity:0}
+@media (min-width:1024px){.arr #board .blk,.arr #board .rows,.arr #board .foot,.arr #credit{opacity:0}}
+@media (max-width:1023.98px){#name,#hl,#patch,#board,#mapline,#credit,#ptag{transition:opacity .2s linear}}
+
+/* the board */
+#board{position:absolute;left:0;top:0}
+.shelf{position:absolute;left:0;top:0;width:100%;color:var(--cream)}
+.shelf[hidden]{display:block;visibility:hidden}
+.hd{position:absolute;left:0;top:0}
+.hd.off{opacity:0}
+.blk .lab{display:block}
+.blk .sn{display:block;font-family:var(--fm);font-weight:600;text-transform:uppercase;letter-spacing:.03em;line-height:1.05}
+.blk .hdate{display:block}
+.rows li{display:block}
+.nm1{display:block;font-family:var(--fx);line-height:1.25;white-space:nowrap}
+.l2{display:flex;justify-content:space-between;gap:10px;font-family:var(--fx);line-height:1.3;white-space:nowrap}
+.rows .q{font-family:var(--ff);font-weight:400}
+.foot a{display:block;font-weight:600;white-space:nowrap}
+
+/* the case: the one place below the wall */
+#case{position:relative;width:100%;overflow:hidden}
+#case img{width:100%;height:auto}
+#case .w p{margin:0}
+#case .g{margin-top:.5em}
+#case .lab{font-size:11.5px;margin-left:.3em}
+.blkl{display:block;font-weight:600;white-space:nowrap;font-size:16px;line-height:22px;padding:11px 0;margin:-7px 0 -11px}
+@media (min-width:1024px){.shelf.cpt2 .foot{white-space:nowrap}.shelf.cpt2 .foot a{display:inline-block;margin-right:.6em}}
+
+/* Revision 3 */
+#inner{position:absolute;left:0;top:0;width:100%;height:100%}
+#casebox{position:absolute;left:0;top:0}
+#casebox #caselayer{position:static;display:block}
+#foot1p,#foot2p{transition:opacity .15s linear}
+.frz{display:block;font-weight:600;font-size:14px;line-height:19px;padding:3px 0;margin-top:2px;white-space:normal}
+@media (max-width:1023.98px){#case{position:absolute!important;left:0;top:0;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}}
